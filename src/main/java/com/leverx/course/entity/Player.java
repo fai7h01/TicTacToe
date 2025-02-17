@@ -12,7 +12,7 @@ public abstract class Player {
         this.sign = sign;
     }
 
-    public abstract int getMove(Board board, Scanner scanner);
+    public abstract int getMove(Board board);
 
     public Sign getSign() {
         return sign;

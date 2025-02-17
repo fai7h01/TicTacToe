@@ -11,7 +11,8 @@ public class Human extends Player{
     }
 
     @Override
-    public int getMove(Board board, Scanner scanner) {
+    public int getMove(Board board) {
+        Scanner scanner = new Scanner(System.in);
         int move;
         do {
             System.out.println("Enter your move [1-9]: ");
@@ -21,6 +22,7 @@ public class Human extends Player{
             }
             move = scanner.nextInt();
         } while (!board.isValidMove(move));
+        scanner.close();
         return move;
     }
 }
