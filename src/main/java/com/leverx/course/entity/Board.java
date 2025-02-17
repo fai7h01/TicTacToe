@@ -14,7 +14,6 @@ public class Board {
         }
     }
 
-
     public boolean isValidMove(int move) {
         int row = (move - 1) / 3;
         int col = (move - 1) % 3;
@@ -22,7 +21,14 @@ public class Board {
     }
 
     public boolean isFull() {
-
+        for (char[] row : board) {
+            for (char cell : row) {
+                if (cell == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean makeMove() {
