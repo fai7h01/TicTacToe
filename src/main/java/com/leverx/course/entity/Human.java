@@ -14,15 +14,17 @@ public class Human extends Player{
     public int getMove(Board board) {
         Scanner scanner = new Scanner(System.in);
         int move;
-        do {
+        while (true) {
             System.out.println("Enter your move [1-9]: ");
             if (scanner.hasNextInt()) {
-                System.out.println("Invalid Move! Try again.");
+                move = scanner.nextInt();
+                if (board.isValidMove(move)) {
+                    return move;
+                }
+            } else {
                 scanner.next();
             }
-            move = scanner.nextInt();
-        } while (!board.isValidMove(move));
-        scanner.close();
-        return move;
+            System.out.println("Invalid Move! Try Again");
+        }
     }
 }
