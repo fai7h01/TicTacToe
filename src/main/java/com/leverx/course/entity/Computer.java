@@ -3,7 +3,6 @@ package com.leverx.course.entity;
 import com.leverx.course.enums.Difficulty;
 import com.leverx.course.enums.Sign;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -40,11 +39,11 @@ public class Computer extends Player{
         List<Integer> availableMoves = board.getAvailableMoves();
 
         for (Integer move : availableMoves) {
-            Board tempBoard = getCopyOfBoard(board);
+            Board tempBoard = new Board();
+            copyBoard(board.getBoard(), tempBoard.getBoard());
             tempBoard.makeMove(move, getSign());
 
             int score = miniMax(tempBoard, false); // after move, this checks possible outcomes (program is maximizer, user is minimizer)
-            log.info("Score while getting best move: " + score);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;
@@ -62,18 +61,19 @@ public class Computer extends Player{
         int bestScore = isMaximizing ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
         for (Integer move : board.getAvailableMoves()) {
-            Board tempBoard = getCopyOfBoard(board);
+            Board tempBoard = new Board();
+            copyBoard(board.getBoard(), tempBoard.getBoard());
             tempBoard.makeMove(move, isMaximizing ? getSign() : (getSign() == Sign.X ? Sign.O : Sign.X));
-            int score = miniMax(board, !isMaximizing);
+            int score = miniMax(tempBoard, !isMaximizing);
             bestScore = isMaximizing ? Math.max(score, bestScore) : Math.min(score, bestScore);
         }
         return bestScore;
     }
 
-    private Board getCopyOfBoard(Board board) {
-        Board copy = new Board();
-        copy.setBoard(Arrays.copyOf(board.getBoard(), board.getBoard().length));
-        return copy;
+    private void copyBoard(char[][] board, char[][] copy) {
+        for (int i = 0; i < 3; i++) {
+            System.arraycopy(board[i], 0, copy[i], 0, 3);
+        }
     }
 }
 
