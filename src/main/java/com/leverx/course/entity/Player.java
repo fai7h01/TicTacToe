@@ -2,7 +2,6 @@ package com.leverx.course.entity;
 
 import com.leverx.course.enums.Sign;
 
-import java.util.Scanner;
 
 public abstract class Player {
 
