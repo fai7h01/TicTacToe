@@ -5,11 +5,8 @@ import com.leverx.course.enums.Sign;
 
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
 
 public class Computer extends Player{
-
-    private static final Logger log = Logger.getLogger(Computer.class.getName());
 
     private Difficulty difficulty;
 
