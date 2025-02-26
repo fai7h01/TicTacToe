@@ -19,15 +19,28 @@ public class Game {
 
         board.printInstructionBoard();
 
-        System.out.print("""
+        int mode;
+
+        while (true) {
+            System.out.print("""
                 Choose game mode by typing either 1 or 2:
                 1. Player vs Player
                 2. Player vs Computer
                 """);
 
-        int mode = scanner.nextInt();
-        scanner.nextLine();
-
+            if (scanner.hasNextInt()) {
+                mode = scanner.nextInt();
+                scanner.nextLine();
+                if (mode == 1 || mode == 2) {
+                    break;
+                } else {
+                    System.out.println("Invalid input! Please enter either 1 or 2.");
+                }
+            } else {
+                scanner.next();
+                System.out.println("Invalid input! Please enter a number.");
+            }
+        }
 
         if (mode == 1) {
             playerOne = new Human(Sign.X);
