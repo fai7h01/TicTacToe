@@ -3,7 +3,9 @@ package com.leverx.course.entity;
 import com.leverx.course.enums.Sign;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Board {
 
@@ -11,11 +13,14 @@ public class Board {
 
     public Board() {
         board = new char[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = ' ';
-            }
-        }
+        IntStream.range(0, 3)
+                .forEach(i -> IntStream.range(0, 3)
+                        .forEach(j -> board[i][j] = ' '));
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                board[i][j] = ' ';
+//            }
+//        }
     }
 
     public boolean isValidMove(int move) {
@@ -25,14 +30,16 @@ public class Board {
     }
 
     public boolean isFull() {
-        for (char[] row : board) {
-            for (char cell : row) {
-                if (cell == ' ') {
-                    return false;
-                }
-            }
-        }
-        return true;
+//        for (char[] row : board) {
+//            for (char cell : row) {
+//                if (cell == ' ') {
+//                    return false;
+//                }
+//            }
+//        }
+        return Arrays.stream(board)
+                .flatMapToInt(row -> new String(row).chars())
+                .noneMatch(cell -> cell == ' ');
     }
 
     public void makeMove(int move, Sign sign) {
@@ -93,21 +100,21 @@ public class Board {
 
     public void printInstructionBoard() {
         System.out.println("""
-            Welcome to Tic-Tac-Toe!
+                Welcome to Tic-Tac-Toe!
 
-            Here's how the board looks:
+                Here's how the board looks:
 
-            | - | - | - |
-            | 1 | 2 | 3 |
-            | - | - | - |
-            | 4 | 5 | 6 |
-            | - | - | - |
-            | 7 | 8 | 9 |
-            | - | - | - |
+                | - | - | - |
+                | 1 | 2 | 3 |
+                | - | - | - |
+                | 4 | 5 | 6 |
+                | - | - | - |
+                | 7 | 8 | 9 |
+                | - | - | - |
 
-            Each number corresponds to a position on the board.
-            You can make a move by choosing a number from 1 to 9.
-            """);
+                Each number corresponds to a position on the board.
+                You can make a move by choosing a number from 1 to 9.
+                """);
     }
 
     public void resetBoard() {

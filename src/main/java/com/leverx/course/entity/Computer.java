@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Computer extends Player{
 
-    private Difficulty difficulty;
+    private final Difficulty difficulty;
 
     public Computer(Sign sign, Difficulty difficulty) {
         super(sign);
