@@ -67,11 +67,11 @@ public class Game {
             System.out.println("Would you like to play again? (y/n)");
             answer = scanner.nextLine().trim().toLowerCase();
 
-            if (answer.equals("y")) {
+            if (answer.equalsIgnoreCase("y")) {
                 board.resetBoard();
                 start(scanner);
                 return;
-            } else if (answer.equals("n")) {
+            } else if (answer.equalsIgnoreCase("n")) {
                 System.exit(0);
             } else {
                 System.out.println("Invalid input! Please enter 'y' or 'n'.");
